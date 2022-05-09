@@ -12,7 +12,7 @@ export interface OrderCreatedEvent {
     ticket: {
       id: string;
       price: number;
-      stock: string;
+      stock: number;
     };
     itemAmount: number;
   };
