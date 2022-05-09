@@ -19,3 +19,4 @@ __export(require("./events/base-listener"));
 __export(require("./events/base-publisher"));
 __export(require("./events/subjects"));
 __export(require("./events/types/order-status"));
+__export(require("./nats-wrapper"));
