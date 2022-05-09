@@ -1,1 +1,2 @@
-export declare const requireAuth: (req: any, _res: any, next: any) => void;
+import { Request, Response, NextFunction } from "express";
+export declare const requireAuth: (req: Request<import("express-serve-static-core").ParamsDictionary, any, any, import("express-serve-static-core").Query>, _res: Response<any>, next: NextFunction) => void;

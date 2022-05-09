@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from "express";
 interface UserPayload {
     id: string;
     email: string;
@@ -9,5 +10,5 @@ declare global {
         }
     }
 }
-export declare const currentUser: (req: any, _res: any, next: any) => any;
+export declare const currentUser: (req: Request<import("express-serve-static-core").ParamsDictionary, any, any, import("express-serve-static-core").Query>, _res: Response<any>, next: NextFunction) => void;
 export {};

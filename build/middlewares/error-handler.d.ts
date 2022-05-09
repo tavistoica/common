@@ -1,1 +1,2 @@
-export declare const errorHandler: (err: Error, _req: any, res: any, next: any) => any;
+import { Request, Response, NextFunction } from "express";
+export declare const errorHandler: (err: Error, _req: Request<import("express-serve-static-core").ParamsDictionary, any, any, import("express-serve-static-core").Query>, res: Response<any>, next: NextFunction) => Response<any> | undefined;
