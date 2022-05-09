@@ -16,7 +16,7 @@
     "build/**/*"
   ],
   "scripts": {
-    "clean": "rmdir -rf ./build/*",
+    "clean": "rmdir -rf ./build",
     "build": "npm run clean && tsc",
     "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish"
   },
