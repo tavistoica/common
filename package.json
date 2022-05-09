@@ -2,6 +2,14 @@
   "name": "@ostoica/common",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tavistoica/common.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tavistoica/common/issues"
+  },
+  "homepage": "https://github.com/tavistoica/common#readme",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
