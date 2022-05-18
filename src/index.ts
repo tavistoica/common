@@ -10,6 +10,7 @@ export * from "./errors/not-enough-stock-error";
 export * from "./middlewares/current-user";
 export * from "./middlewares/error-handler";
 export * from "./middlewares/require-auth";
+export * from "./middlewares/require-seller";
 export * from "./middlewares/validate-request";
 
 export * from "./events/base-listener";
