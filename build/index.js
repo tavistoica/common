@@ -14,6 +14,7 @@ __export(require("./errors/not-enough-stock-error"));
 __export(require("./middlewares/current-user"));
 __export(require("./middlewares/error-handler"));
 __export(require("./middlewares/require-auth"));
+__export(require("./middlewares/require-seller"));
 __export(require("./middlewares/validate-request"));
 __export(require("./events/base-listener"));
 __export(require("./events/base-publisher"));
