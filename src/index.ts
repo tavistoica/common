@@ -23,6 +23,6 @@ export * from "./events/order-cancelled-event";
 export * from "./events/order-created-event";
 export * from "./events/expiration-complete-event";
 export * from "./events/payment-created-event";
-export * from "./events/expiration-complete-event";
+export * from "./events/order-complete-event";
 
 export * from "./nats-wrapper";
