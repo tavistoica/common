@@ -9,5 +9,6 @@ export interface TicketCreatedEvent {
     price: number;
     userId: string;
     stock: number;
+    imagePath: string;
   };
 }

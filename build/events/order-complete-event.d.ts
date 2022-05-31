@@ -1,6 +1,6 @@
 import { Subjects } from "./subjects";
 export interface OrderCompletedEvent {
-    subject: Subjects.OrderCreated;
+    subject: Subjects.OrderCompleted;
     data: {
         id: string;
         version: number;

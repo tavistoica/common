@@ -10,5 +10,6 @@ export interface TicketUpdatedEvent {
     userId: string;
     stock: number;
     orderId?: string[];
+    imagePath: string;
   };
 }

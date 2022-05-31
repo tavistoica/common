@@ -8,6 +8,7 @@ export interface OrderCancelledEvent {
     ticket: {
       id: string;
       stock: number;
+      imagePath: string;
     };
     itemAmount: number;
   };
