@@ -5,7 +5,7 @@ export interface OrderCancelledEvent {
   data: {
     id: string;
     version: number;
-    ticket: {
+    meal: {
       id: string;
       stock: number;
       imagePath: string;

@@ -1,7 +1,7 @@
 import { Subjects } from "./subjects";
 
-export interface TicketCreatedEvent {
-  subject: Subjects.TicketCreated;
+export interface MealUpdatedEvent {
+  subject: Subjects.MealUpdated;
   data: {
     id: string;
     version: number;
@@ -9,6 +9,7 @@ export interface TicketCreatedEvent {
     price: number;
     userId: string;
     stock: number;
+    orderId?: string[];
     imagePath: string;
   };
 }

@@ -5,7 +5,7 @@ export interface OrderCompletedEvent {
   data: {
     id: string;
     version: number;
-    ticket: {
+    meal: {
       id: string;
       stock: number;
       imagePath: string;

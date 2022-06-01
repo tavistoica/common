@@ -9,7 +9,7 @@ export interface OrderCreatedEvent {
     status: OrderStatus;
     userId: string;
     expiresAt: string;
-    ticket: {
+    meal: {
       id: string;
       price: number;
       stock: number;
