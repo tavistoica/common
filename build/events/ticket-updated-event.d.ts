@@ -1,14 +1,14 @@
 import { Subjects } from "./subjects";
-export interface TicketUpdatedEvent {
-    subject: Subjects.TicketUpdated;
-    data: {
-        id: string;
-        version: number;
-        title: string;
-        price: number;
-        userId: string;
-        stock: number;
-        orderId?: string[];
-        imagePath: string;
-    };
+export interface MealUpdatedEvent {
+  subject: Subjects.MealUpdated;
+  data: {
+    id: string;
+    version: number;
+    title: string;
+    price: number;
+    userId: string;
+    stock: number;
+    orderId?: string[];
+    imagePath: string;
+  };
 }

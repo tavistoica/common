@@ -19,5 +19,7 @@ __export(require("./middlewares/validate-request"));
 __export(require("./events/base-listener"));
 __export(require("./events/base-publisher"));
 __export(require("./events/subjects"));
+__export(require("./events/ticket-created-event"));
+__export(require("./events/ticket-updated-event"));
 __export(require("./events/types/order-status"));
 __export(require("./nats-wrapper"));
