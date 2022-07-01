@@ -1,7 +1,7 @@
 export enum OrderStatus {
   // When the order has been created, but the
   // meal it is trying to order has not been reserved
-  Created = "created",
+  Pending = "pending",
 
   // The meal the order is trying to reserve has already
   // been reserved, or when the user has cancelled the order.

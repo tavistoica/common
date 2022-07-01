@@ -2,7 +2,7 @@ export enum Subjects {
   MealCreated = "meal:created",
   MealUpdated = "meal:updated",
 
-  OrderCreated = "order:created",
+  OrderCreated = "order:pending",
   OrderCancelled = "order:cancelled",
   OrderCompleted = "order:completed",
 
