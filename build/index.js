@@ -11,6 +11,8 @@ __export(require("./errors/not-authorized-error"));
 __export(require("./errors/not-found-error"));
 __export(require("./errors/request-validation-error"));
 __export(require("./errors/not-enough-stock-error"));
+__export(require("./types/user.types"));
+__export(require("./constants/user.constants"));
 __export(require("./middlewares/current-user"));
 __export(require("./middlewares/error-handler"));
 __export(require("./middlewares/require-auth"));
