@@ -4,4 +4,4 @@ export enum UserEnum {
   Restaurant = "Restaurant",
 }
 
-export type User = UserEnum.Admin | UserEnum.Customer | UserEnum.Restaurant;
+export type UserType = UserEnum.Admin | UserEnum.Customer | UserEnum.Restaurant;
