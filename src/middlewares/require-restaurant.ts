@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { USER_TYPES } from "../constants/user.constants";
 
+import { UserEnum } from "../types/user.types";
 import { NotAuthorizedError } from "../errors/not-authorized-error";
 
 export const requireRestaurant = (
@@ -8,7 +8,7 @@ export const requireRestaurant = (
   _res: Response,
   next: NextFunction
 ) => {
-  if (req.currentUser?.role !== USER_TYPES.RESTAURANT) {
+  if (req.currentUser?.role !== UserEnum.Restaurant) {
     throw new NotAuthorizedError();
   }
 

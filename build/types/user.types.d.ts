@@ -3,4 +3,4 @@ export declare enum UserEnum {
     Admin = "Admin",
     Restaurant = "Restaurant"
 }
-export declare type User = UserEnum.Admin | UserEnum.Customer | UserEnum.Restaurant;
+export declare type UserType = UserEnum.Admin | UserEnum.Customer | UserEnum.Restaurant;
