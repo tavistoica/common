@@ -2,7 +2,11 @@ import { Request, Response, NextFunction } from "express";
 // import { NotAuthorizedError } from "../errors/not-authorized-error";
 import jwt from "jsonwebtoken";
 
-const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
+export const requireAuth = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.header("x-access-token");
   if (!token) {
     return res
@@ -24,5 +28,3 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
       .json({ error: true, message: "Access Denied: Invalid token" });
   }
 };
-
-export default requireAuth;
