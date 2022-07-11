@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // import { NotAuthorizedError } from "../errors/not-authorized-error";
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var requireAuth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+exports.requireAuth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var token, tokenDetails;
     return __generator(this, function (_a) {
         token = req.header("x-access-token");
@@ -64,4 +64,3 @@ var requireAuth = function (req, res, next) { return __awaiter(void 0, void 0, v
         return [2 /*return*/];
     });
 }); };
-exports.default = requireAuth;
