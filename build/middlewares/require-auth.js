@@ -42,24 +42,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import { NotAuthorizedError } from "../errors/not-authorized-error";
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.requireAuth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var token, tokenDetails;
+    var accessToken, refreshToken, accessTokenDetails, refreshTokenDetails;
     return __generator(this, function (_a) {
-        token = req.header("x-access-token");
-        if (!token) {
+        accessToken = req.header("AccessToken");
+        refreshToken = req.header("RefreshToken");
+        if (!accessToken || !refreshToken) {
             return [2 /*return*/, res
                     .status(403)
-                    .json({ error: true, message: "Access Denied: No token provided" })];
+                    .json({ error: true, message: "Access Denied: No tokens provided" })];
         }
         try {
-            tokenDetails = jsonwebtoken_1.default.verify(token, process.env.ACCESS_TOKEN_PRIVATE_KEY);
+            accessTokenDetails = jsonwebtoken_1.default.verify(accessToken, process.env.ACCESS_TOKEN_PRIVATE_KEY);
             // @ts-ignore
-            req.user = tokenDetails;
+            req.user = accessTokenDetails;
             next();
         }
         catch (err) {
-            return [2 /*return*/, res
-                    .status(403)
-                    .json({ error: true, message: "Access Denied: Invalid token" })];
+            try {
+                refreshTokenDetails = jsonwebtoken_1.default.verify(accessToken, process.env.ACCESS_TOKEN_PRIVATE_KEY);
+                // @ts-ignore
+                req.user = refreshTokenDetails;
+                next();
+            }
+            catch (err) {
+                return [2 /*return*/, res
+                        .status(403)
+                        .json({ error: true, message: "Access Denied: Invalid token" })];
+            }
         }
         return [2 /*return*/];
     });

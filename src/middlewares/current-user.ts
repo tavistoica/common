@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import { UserType } from "../types/user.types";
 
 interface UserPayload {
-  id: string;
   email: string;
   role: UserType;
 }
@@ -22,17 +21,22 @@ export const currentUser = (
   _res: Response,
   next: NextFunction
 ) => {
-  if (!req.session?.jwt) {
+  const authHeader = req.headers.authorization || req.headers.Authorization;
+
+  if (!authHeader) {
     return next();
   }
 
   try {
     const payload = jwt.verify(
-      req.session.jwt,
+      // @ts-ignore
+      authHeader,
       process.env.JWT_KEY!
     ) as UserPayload;
     req.currentUser = payload;
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 
   next();
 };

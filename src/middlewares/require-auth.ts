@@ -1,44 +1,28 @@
 import { Request, Response, NextFunction } from "express";
 // import { NotAuthorizedError } from "../errors/not-authorized-error";
 import jwt from "jsonwebtoken";
+import { Token, CustomRequest } from "../types/request.types";
 
 export const requireAuth = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const accessToken = req.header("AccessToken");
-  const refreshToken = req.header("RefreshToken");
+  const authHeader = req.headers.authorization || req.headers.Authorization;
 
-  if (!accessToken || !refreshToken) {
-    return res
-      .status(403)
-      .json({ error: true, message: "Access Denied: No tokens provided" });
-  }
-
-  try {
-    const accessTokenDetails = jwt.verify(
-      accessToken,
-      process.env.ACCESS_TOKEN_PRIVATE_KEY!
-    );
-
-    // @ts-ignore
-    req.user = accessTokenDetails;
-    next();
-  } catch (err) {
+  if (authHeader && typeof authHeader === "string") {
     try {
-      const refreshTokenDetails = jwt.verify(
-        accessToken,
+      const decoded = jwt.verify(
+        authHeader,
         process.env.ACCESS_TOKEN_PRIVATE_KEY!
       );
-
-      // @ts-ignore
-      req.user = refreshTokenDetails;
+      (req as CustomRequest).token = decoded as Token;
       next();
     } catch (err) {
-      return res
-        .status(403)
-        .json({ error: true, message: "Access Denied: Invalid token" });
+      console.log("err", err);
+      return res.sendStatus(403); //invalid token
     }
+  } else {
+    return res.sendStatus(403); //token not provided
   }
 };

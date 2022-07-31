@@ -2,15 +2,19 @@ import { Request, Response, NextFunction } from "express";
 
 import { UserEnum } from "../types/user.types";
 import { NotAuthorizedError } from "../errors/not-authorized-error";
+import { CustomRequest } from "../types/request.types";
+import { requireAuth } from "./require-auth";
 
 export const requireUser = (
   req: Request,
-  _res: Response,
+  res: Response,
   next: NextFunction
 ) => {
-  if (req.currentUser?.role !== UserEnum.Customer) {
-    throw new NotAuthorizedError();
-  }
+  requireAuth(req, res, () => {
+    if ((req as CustomRequest).token.role !== UserEnum.Customer) {
+      throw new NotAuthorizedError();
+    }
+  });
 
   next();
 };
