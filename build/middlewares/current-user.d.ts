@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { UserType } from "../types/user.types";
 interface UserPayload {
-    id: string;
     email: string;
     role: UserType;
 }

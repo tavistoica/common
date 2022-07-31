@@ -42,33 +42,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import { NotAuthorizedError } from "../errors/not-authorized-error";
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.requireAuth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var accessToken, refreshToken, accessTokenDetails, refreshTokenDetails;
+    var authHeader, decoded;
     return __generator(this, function (_a) {
-        accessToken = req.header("AccessToken");
-        refreshToken = req.header("RefreshToken");
-        if (!accessToken || !refreshToken) {
-            return [2 /*return*/, res
-                    .status(403)
-                    .json({ error: true, message: "Access Denied: No tokens provided" })];
-        }
-        try {
-            accessTokenDetails = jsonwebtoken_1.default.verify(accessToken, process.env.ACCESS_TOKEN_PRIVATE_KEY);
-            // @ts-ignore
-            req.user = accessTokenDetails;
-            next();
-        }
-        catch (err) {
+        authHeader = req.headers.authorization || req.headers.Authorization;
+        if (authHeader && typeof authHeader === "string") {
             try {
-                refreshTokenDetails = jsonwebtoken_1.default.verify(accessToken, process.env.ACCESS_TOKEN_PRIVATE_KEY);
-                // @ts-ignore
-                req.user = refreshTokenDetails;
+                decoded = jsonwebtoken_1.default.verify(authHeader, process.env.ACCESS_TOKEN_PRIVATE_KEY);
+                req.token = decoded;
                 next();
             }
             catch (err) {
-                return [2 /*return*/, res
-                        .status(403)
-                        .json({ error: true, message: "Access Denied: Invalid token" })];
+                console.log("err", err);
+                return [2 /*return*/, res.sendStatus(403)]; //invalid token
             }
+        }
+        else {
+            return [2 /*return*/, res.sendStatus(403)]; //token not provided
         }
         return [2 /*return*/];
     });

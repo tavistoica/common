@@ -5,14 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.currentUser = function (req, _res, next) {
-    var _a;
-    if (!((_a = req.session) === null || _a === void 0 ? void 0 : _a.jwt)) {
+    var authHeader = req.headers.authorization || req.headers.Authorization;
+    if (!authHeader) {
         return next();
     }
     try {
-        var payload = jsonwebtoken_1.default.verify(req.session.jwt, process.env.JWT_KEY);
+        var payload = jsonwebtoken_1.default.verify(
+        // @ts-ignore
+        authHeader, process.env.JWT_KEY);
         req.currentUser = payload;
     }
-    catch (err) { }
+    catch (err) {
+        console.log(err);
+    }
     next();
 };
