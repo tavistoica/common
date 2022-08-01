@@ -6,13 +6,16 @@ import { Token } from "../types/request.types";
 import { requireAuth } from "./require-auth";
 import { decode } from "jsonwebtoken";
 
-export const requireUser = (
+export const requireUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  requireAuth(req, res, () => {
+  await requireAuth(req, res, () => {
+    console.log("it gets to the callback");
     const authHeader = req.headers.authorization;
+    console.log("authHeader", authHeader);
+
     if (!authHeader) {
       throw new NotAuthorizedError();
     }

@@ -7,13 +7,16 @@ import { requireAuth } from "./require-auth";
 import { Token } from "../types/request.types";
 import { decode } from "jsonwebtoken";
 
-export const requireRestaurant = (
+export const requireRestaurant = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  requireAuth(req, res, () => {
+  await requireAuth(req, res, () => {
+    console.log("it gets to the callback");
     const authHeader = req.headers.authorization;
+    console.log("authHeader", authHeader);
+
     if (!authHeader) {
       throw new NotAuthorizedError();
     }

@@ -8,7 +8,9 @@ export const requireAuth = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log("it gets into the requireAuth");
   const authHeader = req.headers.authorization || req.headers.Authorization;
+  console.log("requireAuth - authHeader: ", authHeader);
 
   if (authHeader && typeof authHeader === "string") {
     try {
