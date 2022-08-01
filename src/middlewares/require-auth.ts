@@ -9,15 +9,13 @@ export const requireAuth = async (
   next: NextFunction
 ) => {
   console.log("it gets into the requireAuth");
-  const authHeader = req.headers.authorization || req.headers.Authorization;
-  console.log("requireAuth - authHeader: ", authHeader);
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
+  const token = authHeader.split(" ")[1];
 
-  if (authHeader && typeof authHeader === "string") {
+  if (token && typeof token === "string") {
     try {
-      const decoded = jwt.verify(
-        authHeader,
-        process.env.ACCESS_TOKEN_PRIVATE_KEY!
-      );
+      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_PRIVATE_KEY!);
       (req as CustomRequest).token = decoded as Token;
       next();
     } catch (err) {

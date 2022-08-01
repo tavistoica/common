@@ -12,14 +12,14 @@ export const requireUser = async (
   next: NextFunction
 ) => {
   await requireAuth(req, res, () => {
-    console.log("it gets to the callback");
     const authHeader = req.headers.authorization;
-    console.log("authHeader", authHeader);
+    if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
+    const token = authHeader.split(" ")[1];
 
     if (!authHeader) {
       throw new NotAuthorizedError();
     }
-    const decodedToken = decode(req.header("authorization")!);
+    const decodedToken = decode(token!);
     if ((decodedToken as Token)?.role !== UserEnum.Customer) {
       throw new NotAuthorizedError();
     }
