@@ -45,13 +45,14 @@ exports.requireUser = function (req, res, next) { return __awaiter(void 0, void 
         switch (_a.label) {
             case 0: return [4 /*yield*/, require_auth_1.requireAuth(req, res, function () {
                     var _a;
-                    console.log("it gets to the callback");
                     var authHeader = req.headers.authorization;
-                    console.log("authHeader", authHeader);
+                    if (!(authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith("Bearer ")))
+                        return res.sendStatus(401);
+                    var token = authHeader.split(" ")[1];
                     if (!authHeader) {
                         throw new not_authorized_error_1.NotAuthorizedError();
                     }
-                    var decodedToken = jsonwebtoken_1.decode(req.header("authorization"));
+                    var decodedToken = jsonwebtoken_1.decode(token);
                     if (((_a = decodedToken) === null || _a === void 0 ? void 0 : _a.role) !== user_types_1.UserEnum.Customer) {
                         throw new not_authorized_error_1.NotAuthorizedError();
                     }

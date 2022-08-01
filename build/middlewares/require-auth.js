@@ -42,14 +42,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import { NotAuthorizedError } from "../errors/not-authorized-error";
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.requireAuth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var authHeader, decoded;
+    var authHeader, token, decoded;
     return __generator(this, function (_a) {
         console.log("it gets into the requireAuth");
-        authHeader = req.headers.authorization || req.headers.Authorization;
-        console.log("requireAuth - authHeader: ", authHeader);
-        if (authHeader && typeof authHeader === "string") {
+        authHeader = req.headers.authorization;
+        if (!(authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith("Bearer ")))
+            return [2 /*return*/, res.sendStatus(401)];
+        token = authHeader.split(" ")[1];
+        if (token && typeof token === "string") {
             try {
-                decoded = jsonwebtoken_1.default.verify(authHeader, process.env.ACCESS_TOKEN_PRIVATE_KEY);
+                decoded = jsonwebtoken_1.default.verify(token, process.env.ACCESS_TOKEN_PRIVATE_KEY);
                 req.token = decoded;
                 next();
             }
