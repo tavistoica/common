@@ -6,6 +6,7 @@ export * from "./errors/not-found-error";
 export * from "./errors/request-validation-error";
 export * from "./errors/not-enough-stock-error";
 export * from "./types/user.types";
+export * from "./types/request.types";
 export * from "./constants/user.constants";
 export * from "./middlewares/current-user";
 export * from "./middlewares/error-handler";

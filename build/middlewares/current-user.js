@@ -12,7 +12,7 @@ exports.currentUser = function (req, _res, next) {
     try {
         var payload = jsonwebtoken_1.default.verify(
         // @ts-ignore
-        authHeader, process.env.JWT_KEY);
+        authHeader, process.env.REFRESH_TOKEN_PRIVATE_KEY);
         req.currentUser = payload;
     }
     catch (err) {
