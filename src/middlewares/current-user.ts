@@ -32,7 +32,7 @@ export const currentUser = (
     const payload = jwt.verify(
       // @ts-ignore
       authHeader,
-      process.env.JWT_KEY!
+      process.env.REFRESH_TOKEN_PRIVATE_KEY!
     ) as UserPayload;
     req.currentUser = payload;
   } catch (err) {

@@ -44,7 +44,9 @@ var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.requireAuth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var authHeader, decoded;
     return __generator(this, function (_a) {
+        console.log("it gets into the requireAuth");
         authHeader = req.headers.authorization || req.headers.Authorization;
+        console.log("requireAuth - authHeader: ", authHeader);
         if (authHeader && typeof authHeader === "string") {
             try {
                 decoded = jsonwebtoken_1.default.verify(authHeader, process.env.ACCESS_TOKEN_PRIVATE_KEY);
