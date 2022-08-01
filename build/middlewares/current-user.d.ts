@@ -3,6 +3,7 @@ import { UserType } from "../types/user.types";
 interface UserPayload {
     email: string;
     role: UserType;
+    id: string;
 }
 declare global {
     namespace Express {

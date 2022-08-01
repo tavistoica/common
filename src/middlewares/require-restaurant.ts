@@ -4,7 +4,8 @@ import { UserEnum } from "../types/user.types";
 import { NotAuthorizedError } from "../errors/not-authorized-error";
 
 import { requireAuth } from "./require-auth";
-import { CustomRequest } from "../types/request.types";
+import { Token } from "../types/request.types";
+import { decode } from "jsonwebtoken";
 
 export const requireRestaurant = (
   req: Request,
@@ -12,7 +13,12 @@ export const requireRestaurant = (
   next: NextFunction
 ) => {
   requireAuth(req, res, () => {
-    if ((req as CustomRequest).token.role !== UserEnum.Restaurant) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      throw new NotAuthorizedError();
+    }
+    const decodedToken = decode(authHeader);
+    if ((decodedToken as Token)?.role !== UserEnum.Restaurant) {
       throw new NotAuthorizedError();
     }
   });
