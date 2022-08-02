@@ -7,7 +7,7 @@ var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.currentUser = function (req, res, next) {
     var authHeader = req.headers.authorization;
     if (!(authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith("Bearer ")))
-        return res.sendStatus(401);
+        return next();
     var token = authHeader.split(" ")[1];
     if (!token) {
         return next();
