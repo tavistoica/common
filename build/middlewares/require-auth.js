@@ -49,9 +49,11 @@ exports.requireAuth = function (req, res, next) { return __awaiter(void 0, void 
         if (!(authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith("Bearer ")))
             return [2 /*return*/, res.sendStatus(401)];
         token = authHeader.split(" ")[1];
+        console.log("token encoded: ", token);
         if (token && typeof token === "string") {
             try {
                 decoded = jsonwebtoken_1.default.verify(token, process.env.ACCESS_TOKEN_PRIVATE_KEY);
+                console.log("token decoded: ", decoded);
                 req.token = decoded;
                 next();
             }
